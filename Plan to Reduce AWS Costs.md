@@ -1,4 +1,4 @@
-# How to reduce Amazon AWS costs -   
+# A basic plan to reduce Amazon AWS costs -
 
 Over the time, we might need to provide new infrastructure to new services,  
 or the traffic changes or AWS releases new services, new regions, or instance types, etc.  
