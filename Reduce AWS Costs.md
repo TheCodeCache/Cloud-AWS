@@ -1,6 +1,6 @@
 # How to reduce Amazon AWS costs:  
 
-As times passes, we might need to provide new infrastructure to new services,  
+Over the time, we might need to provide new infrastructure to new services,  
 or the traffic changes or AWS releases new services, new regions, or instance types, etc.  
 The point is that our infrastructure will change over time.  
 And hence, `Cost optimization` needs to be done periodically to achieve the best results.  
@@ -21,7 +21,7 @@ Optimize -
 We need to perform the actions based on the previous strategy.  
 This step would be complex at times, as the workloads may have live traffic,   
 and we may have limited amount of time to make changes w/o affecting the services.  
-In this case, we should consider maintenance window, testin on dev env. etc.
+In this case, we should consider maintenance window, testin on dev env. etc.  
 **Step-5:**  
 Repeat -  
 We need to do the previous optimization activity for all the strategy outlined above in Step-3.  
