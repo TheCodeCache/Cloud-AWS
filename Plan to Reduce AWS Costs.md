@@ -16,6 +16,7 @@ Define the strategies for each service -
     - Strategies to reduce Amazon EBS Costs  
     - Strategies to reduce Amazon RDS Costs  
     - Strategies to reduce Amazon S3 Costs  
+    - Saving Plans Consideration
 **Step-4**:  
 Optimize -  
 We need to perform the actions based on the previous strategy.  
