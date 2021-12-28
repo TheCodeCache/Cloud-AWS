@@ -22,7 +22,10 @@ We can —
 - We can also monitor the S3 APIs that are pending replication, total size,  
 and the maximum time required for replication to the destination Region  
 
+
+
 **Amazon CloudTrail** —  
+
 An operational data lake has many users and multiple administrators,  
 and may be subject to compliance and audit requirements,  
 so it’s important to have a complete audit trail of actions taken and who has performed these actions.  
