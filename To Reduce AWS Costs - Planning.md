@@ -29,6 +29,16 @@ We need to do the previous optimization activity for all the strategy outlined a
 Moreover, the infrastructure will keep changing over the time-period, and new services will appear,  
 so, it's worth repeating the above steps time to time frequently.  
 
+# general practice - 
+
+- Improve Utilization of Amazon EC2 Instances
+- Delete Unattached EBS Volumes
+- Analyze Amazon S3 Usage and Leverage Storage Tiering
+- Review and Modify EC2 Autoscaling Groups Configuration
+- Reuse or Sell Underutilized RIs
+- Identify and Delete Orphaned Snapshots
+- Analysis of Amazon DynamoDB Usage and Cost Reduction
+
 **Reference:**  
 1. https://www.iobasis.com/How-to-reduce-AWS-Costs/
 
