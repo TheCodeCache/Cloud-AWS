@@ -1,4 +1,4 @@
-# Data lake Monitoring - 
+# Data-Lake Monitoring - 
 
 A key aspect of operating a data lake environment is understanding how all of the components,  
 that comprise the data lake are operating and performing,  
