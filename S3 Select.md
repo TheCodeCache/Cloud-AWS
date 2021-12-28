@@ -56,11 +56,42 @@ For example, this partial data retrieval ability is especially useful for server
 
 **Biggest limitation** — It only supports CSV and JSON file formats  
 
+# Using S3 Select with `Apache Spark` — 
+
+code examples —  
+
+scala -  
+```scala
+spark
+  .read
+  .format("s3selectCSV") // "s3selectJson" for Json
+  .schema(...) // optional, but recommended
+  .options(...) // optional. Examples:  
+  // .options(Map("quote" -> "\'", "header" -> "true")) or
+  // .option("quote", "\'").option("header", "true")
+  .load("s3://path/to/my/datafiles")
+```
+python -  
+```python
+spark
+  .read
+  .format("s3selectCSV") // "s3selectJson" for Json
+  .schema(...) // optional, but recommended
+  .options(...) // optional
+  .load("s3://path/to/my/datafiles")
+```
+sql -  
+```sql
+CREATE TEMPORARY VIEW MyView (number INT, name STRING) USING s3selectCSV OPTIONS (path "s3://path/to/my/datafiles", header "true", delimiter "\t")
+```
+
 **Conclusion** —  
 Query pushdown using `S3 Select` is now supported with `Spark`, `Hive` and `Presto in Amazon EMR`.  
-We can use this feature to `push down` the computational work of filtering large data sets for processing from the EMR cluster to Amazon S3,  
+We can use this feature to `push down` the computational work of filtering large data sets,  
+for processing from the EMR cluster to Amazon S3,  
 which can improve performance and reduce the amount of data transferred between `Amazon EMR` and `Amazon S3`.  
 
 **Reference:**  
 1. https://aws.amazon.com/blogs/aws/s3-glacier-select/
+2. https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark-s3select.html
 
