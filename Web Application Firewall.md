@@ -18,7 +18,8 @@ WAFs provide efficient protection from a number of malicious security attacks su
 - Distributed denial of service (DDoS) attacks
 - Cookie poisoning
 - Parameter tampering
-- 
+
+
 
 **Reference:**  
 1. https://www.ptsecurity.com/ww-en/analytics/knowledge-base/how-to-prevent-sql-injection-attacks/
