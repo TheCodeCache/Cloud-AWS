@@ -3,6 +3,15 @@
 This is a library built on top of Apache Spark.  
 Works well with tabular data, anything which can be represented as a Spark Dataframe  
 
+pom.xml:  
+```xml
+<!-- https://mvnrepository.com/artifact/com.amazon.deequ/deequ -->
+<dependency>
+    <groupId>com.amazon.deequ</groupId>
+    <artifactId>deequ</artifactId>
+    <version>2.0.0-spark-3.1</version>
+</dependency>
+```
 
 
 [**`Work In Progress . . .`**]
