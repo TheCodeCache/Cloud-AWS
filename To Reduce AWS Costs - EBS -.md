@@ -102,8 +102,7 @@ A snapshot is a whole copy of an EBS volume at a certain point in time.
 Snapshots are stored in S3 and replicated across three AZs within the region.  
 So, they are highly redundant.  
 
-
-Defining Snapshot Policies   
+**`Defining Snapshot Policies`** —  
 A snapshot is a whole copy of an EBS volume at a certain point in time.  
 Snapshots are stored in S3 and replicated across three AZs within the region. So they are highly redundant.  
 Snapshots are also incremental. This means that new backups store only the data that changed since the last snapshot.  
