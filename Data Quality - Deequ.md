@@ -1,9 +1,11 @@
-# Data Quality assessment using Amazon Deequ library — 
+# Data Quality using Amazon **`Deequ`** library — 
 
 This is a library built on top of Apache Spark.  
 Works well with tabular data, anything which can be represented as a Spark Dataframe  
 
-[**`Work In Progress`**]
+
+
+[**`Work In Progress . . .`**]
 
 **Reference:**  
 1. https://aws.amazon.com/blogs/big-data/test-data-quality-at-scale-with-deequ/
