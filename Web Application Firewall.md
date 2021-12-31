@@ -1,6 +1,6 @@
 # AWS WAF - Web Application Firewall — 
 
-One of the best practices to identify SQL injection attacks is having a web application firewall (WAF).  
+One of the best practices to identify **`SQL injection attacks`** is having a web application firewall (WAF).  
 
 A WAF operating in front of the web servers monitors the traffic which goes in and out of the web servers,  
 and identifies patterns that constitute a threat.  
@@ -12,7 +12,7 @@ A WAF will keep monitoring the applications and the GET and POST requests it rec
 
 WAFs provide efficient protection from a number of malicious security attacks such as:  
 
-- SQL injection
+- **`SQL injection`**
 - Cross-site scripting (XSS)
 - Session hijacking
 - Distributed denial of service (DDoS) attacks
