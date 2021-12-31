@@ -1,4 +1,4 @@
-# To Reduce AWS Costs - EC2 — 
+# To Reduce AWS Costs - EBS — 
 
 Amazon `Elastic Block Store` (Amazon `EBS`) is the main storage used for EC2 instances.  
 It's persistent and hosts both the instance operating system and user data.  
@@ -78,22 +78,39 @@ when that instance is terminated. So this avoids keeping an unattached volume.
 We should use it with caution because data on EBS volume will be lost.  
 
 
-Moving data to S3
+**`Moving data to S3`** —  
+Large files in EBS volumes could also be moved to S3.  
+For example, Standard S3 rates are 77% below General Purpose SSD (gp2) volume prices per GB.  
+Additionally, we pay only for data used, and S3 capacity is doesn’t need to be provisioned.  
+And the data is replicated across three AZs at least.
 
-Reducing IOPS
+**`Reducing IOPS`** —  
+In case we are using Provisioned IOPS SSD (io1) Volumes, we are paying additionally for the IOPS capacity.  
+We should check the current IOPS usage using CloudWatch, and compare it with the provisioned amount.  
+And this might allow us to reduce the provisioned IOPS rate, and get an extra cost reduction.  
 
-Using EC2 Instance Store
+**`Using EC2 Instance Store`** —  
+They have a high throughput and very low latency. But these volumes are temporary.  
+The data is available only while the EC2 is running.  
+When the instance is stopped (or terminated), the data is removed.  
+So, these volumes are ideal to keep buffers, caches, and temporary data.  
+If we use big amounts of temporary data, we should consider moving them to an instance store volume.  
+Keep in mind that only a few EC2 instances types support it.  
 
-Avoid Windows-based Operating Systems
-
-Defining Snapshot Policies
-
-
-
+**`Avoid Windows-based Operating Systems`** —  
+A snapshot is a whole copy of an EBS volume at a certain point in time.  
+Snapshots are stored in S3 and replicated across three AZs within the region.  
+So, they are highly redundant.  
 
 
+Defining Snapshot Policies   
+A snapshot is a whole copy of an EBS volume at a certain point in time.  
+Snapshots are stored in S3 and replicated across three AZs within the region. So they are highly redundant.  
+Snapshots are also incremental. This means that new backups store only the data that changed since the last snapshot.  
+Snapshots price is approximately 50% of the cost EBS storage per GB.  
+But these costs could increase fast if we have several snapshots of a volume, or it's data changes fast.  
 
 
-
-
+**Reference:**  
+1. https://www.iobasis.com/Strategies-to-reduce-Amazon-EBS-Storage-Costs/
 
