@@ -94,50 +94,63 @@ Run `lsblk` cmd on the cluster to check the status of LUKS encryption, instead o
 
 # Encryption in transit — 
 
-1. Hadoop - Refer [this](https://hadoop.apache.org/docs/r2.7.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/EncryptedShuffle.html)  
+1. **Hadoop** - Refer [this](https://hadoop.apache.org/docs/r2.7.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/EncryptedShuffle.html)  
 **`Hadoop: Encrypted Shuffle`** -  
 The Encrypted Shuffle capability allows encryption of the MapReduce shuffle using HTTPS  
 and with optional client authentication (also known as bi-directional HTTPS, or HTTPS with client certificates).  
-It comprises:  
 
-
-
-core-site.xml:  
+  core-site.xml:  
 ```xml
-<property>
-    <name>hadoop.ssl.require.client.cert</name>
-    <value>false</value>
-    <final>true</final>
-  </property>
-  <property>
-    <name>hadoop.ssl.hostname.verifier</name>
-    <value>DEFAULT</value>
-    <final>true</final>
-  </property>
-  <property>
-    <name>hadoop.ssl.keystores.factory.class</name>
-    <value>org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory</value>
-    <final>true</final>
-  </property>
-  <property>
-    <name>hadoop.ssl.server.conf</name>
-    <value>ssl-server.xml</value>
-    <final>true</final>
-  </property>
-  <property>
-    <name>hadoop.ssl.client.conf</name>
-    <value>ssl-client.xml</value>
-    <final>true</final>
-  </property>
+  <property>
+    <name>hadoop.ssl.require.client.cert</name>
+    <value>false</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.hostname.verifier</name>
+    <value>DEFAULT</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.keystores.factory.class</name>
+    <value>org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.server.conf</name>
+    <value>ssl-server.xml</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.client.conf</name>
+    <value>ssl-client.xml</value>
+    <final>true</final>
+  </property>
 ```
-mapred-site.xml:  
+  mapred-site.xml:  
 ```xml
-<property>
-    <name>mapreduce.shuffle.ssl.enabled</name>
-    <value>true</value>
-    <final>true</final>
-</property>
-```
+  <property>
+      <name>mapreduce.shuffle.ssl.enabled</name>
+      <value>true</value>
+      <final>true</final>
+  </property>
+```  
+
+  **`Encrypted Intermediate Data Spill files`** -  
+  This capability allows encryption of the intermediate files generated during the merge and shuffle phases.  
+  It can be enabled by setting the `mapreduce.job.encrypted-intermediate-data` job property to `true`.  
+  NOTE: Currently, enabling encrypted intermediate data spills would restrict the number of attempts of the job to 1.  
+
+2. **Tez**:  
+Tez shuffle handler uses TLS (`tez.runtime.ssl.enable`).
+
+3. **Spark** -  
+a.) Internal RPC communication between Spark components, such as the block transfer service and the external shuffle service,  
+is encrypted using the `AES-256` cipher in Amazon EMR 5.9.0  
+In earlier releases, internal RPC communication is encrypted using `SASL` with `DIGEST-MD5` as the cipher.  
+b.) HTTP protocol communication with user interfaces  
+such as Spark History Server and HTTPS-enabled file servers is encrypted using Spark's SSL configuration
+
 # **`To support encryption with HDFS`** —  
 we can use `Transparent encryption in HDFS` on Amazon EMR  
 Transparent encryption is implemented through the use of HDFS encryption zones, which are HDFS paths that you define.  
