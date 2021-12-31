@@ -86,4 +86,5 @@ At high level, 3 general strategy could be like this -
 1. https://aws.amazon.com/blogs/big-data/strategies-for-reducing-your-amazon-emr-costs/
 2. https://www.cloudforecast.io/blog/aws-emr-cost-optimization-guide/
 3. https://www.concurrencylabs.com/blog/guide-to-aws-emr-reserved/
+4. https://medium.com/teads-engineering/reducing-aws-emr-data-processing-costs-7c12a8df6f2a
 
