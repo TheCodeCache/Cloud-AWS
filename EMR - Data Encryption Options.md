@@ -151,6 +151,15 @@ In earlier releases, internal RPC communication is encrypted using `SASL` with `
 b.) HTTP protocol communication with user interfaces  
 such as Spark History Server and HTTPS-enabled file servers is encrypted using Spark's SSL configuration
 
+ **`To Debug` whether the connections are encrypted or not i.e. secure or not:**  
+
+  NOTE: Enable debugging only for troubleshooting, and then only for jobs running on small amounts of data.  
+  It is very verbose and slows down jobs by several orders of magnitude.  
+  (You might need to increase mapred.task.timeout to prevent jobs from failing because tasks run so slowly.)
+
+  ![image](https://user-images.githubusercontent.com/26399543/147829021-50f4e9dd-68db-42ba-bee4-11dfee892e58.png)
+
+
 # **`To support encryption with HDFS`** —  
 we can use `Transparent encryption in HDFS` on Amazon EMR  
 Transparent encryption is implemented through the use of HDFS encryption zones, which are HDFS paths that you define.  
