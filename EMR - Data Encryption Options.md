@@ -60,8 +60,84 @@ Optionally, you may set `dfs.encrypt.data.transfer.algorithm` to either "3des" o
 
 
 2. **`Instance store encryption`** —  
-3. **`EBS volume encryption`** —  
+There're 3 types of instance store volumes as follows -  
+a.) `NVMe-based SSD` b.) `SSD` c.) `HDD`
+For EC2 instance types that use `NVMe-based SSDs` as the instance store volume,  
+NVMe encryption is used regardless of Amazon EMR encryption settings  
+For other instance store volumes (for ex: SSD, HDD),  
+Amazon EMR uses LUKS to encrypt the instance store volume when local disk encryption is enabled  
+regardless of whether EBS volumes are encrypted using EBS encryption or LUKS.  
 
+  **`Linux Unified Key Setup (LUKS)`** -  
+  step-1: install LUKS for RHEL or CentOS -  
+  `yum install cryptsetup-luks`  
+  step-2: encrypt a disk partition using this cmd -  
+  `cryptsetup -y -v luksFormat /dev/xvdc`  
+  To know more about in detail, please refer [Encrypting-data-partitions-on-Linux-using-LUKS](https://www.ibm.com/docs/en/order-management-sw/10.0?topic=considerations-encrypting-data-partitions-using-luks)  
+  Run `lsblk` cmd on the cluster to check the status of LUKS encryption.  
+
+3. **`EBS volume encryption`** —  
+If you create a cluster in a region where Amazon EC2 encryption of EBS volumes is enabled by default for your account,  
+EBS volumes are encrypted even if local disk encryption is not enabled  
+With local disk encryption enabled in a security configuration,  
+the Amazon EMR settings take precedence over the Amazon EC2 encryption-by-default settings for cluster EC2 instances.  
+The following options are available to encrypt EBS volumes using a security configuration:  
+- EBS encryption – (this is also `recommended option`)  
+We can choose to enable EBS encryption.  
+The EBS encryption option encrypts the EBS root device volume and attached storage volumes.  
+The EBS encryption option is available only when you specify AWS Key Management Service as your key provider.  
+`We recommend using EBS encryption`.  
+- LUKS encryption –  
+If you choose to use LUKS encryption for Amazon EBS volumes,  
+the LUKS encryption applies only to attached storage volumes, not to the root device volume  
+Run `lsblk` cmd on the cluster to check the status of LUKS encryption, instead of EBS encryption  
+
+# Encryption in transit — 
+
+1. Hadoop - Refer [this](https://hadoop.apache.org/docs/r2.7.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/EncryptedShuffle.html)  
+**`Hadoop: Encrypted Shuffle`** -  
+The Encrypted Shuffle capability allows encryption of the MapReduce shuffle using HTTPS  
+and with optional client authentication (also known as bi-directional HTTPS, or HTTPS with client certificates).  
+It comprises:  
+
+
+
+core-site.xml:  
+```xml
+<property>
+    <name>hadoop.ssl.require.client.cert</name>
+    <value>false</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.hostname.verifier</name>
+    <value>DEFAULT</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.keystores.factory.class</name>
+    <value>org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.server.conf</name>
+    <value>ssl-server.xml</value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.ssl.client.conf</name>
+    <value>ssl-client.xml</value>
+    <final>true</final>
+  </property>
+```
+mapred-site.xml:  
+```xml
+<property>
+    <name>mapreduce.shuffle.ssl.enabled</name>
+    <value>true</value>
+    <final>true</final>
+</property>
+```
 # **`To support encryption with HDFS`** —  
 we can use `Transparent encryption in HDFS` on Amazon EMR  
 Transparent encryption is implemented through the use of HDFS encryption zones, which are HDFS paths that you define.  
