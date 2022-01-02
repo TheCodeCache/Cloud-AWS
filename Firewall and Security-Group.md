@@ -8,6 +8,5 @@ this is also called `Physical Firewall` or N/W Device Firewall
 
 so, we could visualize it like this:  
 
-
 ![image](https://user-images.githubusercontent.com/26399543/147884922-69535597-973c-4954-afb4-32f11415b3aa.png)  
 
